@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Registro de Visitantes - Ministerio Internacional Ágape</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f3f7 0%, #e8e2ee 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            user-select: none;
+        }
+
+        .kiosk-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        /* Cabecera de la Marca (Estilo Web Agape) */
+        .kiosk-header {
+            background: #1a1a2e;
+            color: #ffffff;
+            padding: 24px 30px;
+            text-align: center;
+        }
+
+        .kiosk-header h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .kiosk-header p {
+            font-size: 13px;
+            margin: 6px 0 0 0;
+            color: #b8b8c8;
+        }
+
+        .kiosk-body {
+            padding: 35px 30px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #1a1a2e;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #4a4b57;
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #e1e1e8;
+            border-radius: 12px;
+            background-color: #faf9fc;
+            outline: none;
+            transition: all 0.2s;
+            -webkit-appearance: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #5c32a6;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(92, 50, 166, 0.1);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+            text-align: center;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: #5c32a6;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #4b2888;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f5;
+            color: #555566;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e4e4eb;
+        }
+
+        /* Barra de progreso elegante */
+        .progress-container {
+            background: #f0f0f5;
+            height: 6px;
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 50%;
+            background: #5c32a6;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="kiosk-container">
+    <!-- Encabezado Institucional -->
+    <div class="kiosk-header">
+        <h1>Ministerio Internacional Ágape</h1>
+        <p>Sistema de Registro de Visitantes</p>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="kiosk-body">
+        <form id="kioskForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe1Xc_QXY0yvGYCBGYhaJuO15zvzBDICylnV349B6iJp-9vUQ/formResponse" method="POST" target="hidden_iframe">
+            
+            <!-- PASO 1 -->
+            <div class="step active" id="step1">
+                <h2>1. Tus Datos Personales</h2>
+                
+                <label for="nombre">Nombre y Apellido</label>
+                <input type="text" id="nombre" name="entry.1302874866" placeholder="Escribe tu nombre completo" required autocomplete="off">
+
+                <label for="celular">Celular</label>
+                <input type="tel" id="celular" name="entry.840733888" placeholder="Ej: 99998888" required autocomplete="off">
+
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="entry.942844008" placeholder="Tu edad" required autocomplete="off">
+
+                <div class="btn-group">
+                    <button type="button" class="btn-primary" onclick="nextStep()">Siguiente &rarr;</button>
+                </div>
+            </div>
+
+            <!-- PASO 2 -->
+            <div class="step" id="step2">
+                <h2>2. Cuéntanos más sobre ti</h2>
+                
+                <label for="redSocial">¿Red social por la que nos conociste?</label>
+                <select id="redSocial" name="entry.1695214305" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="TikTok">TikTok</option>
+                </select>
+
+                <label for="asisteIglesia">¿Asistes a una iglesia?</label>
+                <select id="asisteIglesia" name="entry.745116709" required onchange="toggleIglesiaField(this.value)">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+
+                <div id="campoNombreIglesia" style="display: none;">
+                    <label for="nombreIglesia">¿Cuál es el nombre de la iglesia?</label>
+                    <input type="text" id="nombreIglesia" name="entry.215642894" placeholder="Nombre de tu iglesia" autocomplete="off">
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep()">&larr; Atrás</button>
+                    <button type="submit" class="btn-primary">Finalizar Registro</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="formSubmitted()"></iframe>
+</div>
+
+<script>
+    function nextStep() {
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+        document.getElementById('progressFill').style.width = '100%';
+    }
+
+    function prevStep() {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('progressFill').style.width = '50%';
+    }
+
+    function toggleIglesiaField(value) {
+        const campo = document.getElementById('campoNombreIglesia');
+        const input = document.getElementById('nombreIglesia');
+        if (value === 'Sí') {
+            campo.style.display = 'block';
+            input.required = true;
+        } else {
+            campo.style.display = 'none';
+            input.required = false;
+            input.value = '';
+        }
+    }
+
+    let isSubmitting = false;
+
+    document.getElementById('kioskForm').onsubmit = function() {
+        isSubmitting = true;
+    };
+
+    function formSubmitted() {
+        if (isSubmitting) {
+            alert('¡Muchas gracias por registrarte en Ágape!');
+            location.reload();
+        }
+    }
+
+    (function setInactivityTimer() {
+        let timer;
+        const timeoutDuration = 60000;
+
+        function resetTimer() {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                location.reload();
+            }, timeoutDuration);
+        }
+
+        window.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onkeypress = resetTimer;
+        document.ontouchstart = resetTimer;
+        document.onclick = resetTimer;
+        document.onscroll = resetTimer;
+    })();
+</script>
+
+</body>
+</html>
