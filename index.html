@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Registro de Visitantes - Ministerio Internacional Ágape</title>
     <style>
+        :root {
+            --primary: #5c32a6;
+            --primary-hover: #4b2888;
+            --primary-light: #f3effa;
+            --primary-glow: rgba(92, 50, 166, 0.15);
+            --bg-dark: #161626;
+            --card-bg: #ffffff;
+            --text-main: #242436;
+            --text-muted: #6e6e82;
+            --border: #e3e3ec;
+            --border-focus: #5c32a6;
+            --success: #10b981;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+        }
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -12,49 +28,116 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f3f7 0%, #e8e2ee 100%);
+            background: linear-gradient(135deg, #f3f0f7 0%, #e5dcee 50%, #d8cde6 100%);
             margin: 0;
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            user-select: none;
+            color: var(--text-main);
         }
 
         .kiosk-container {
-            background: #ffffff;
+            background: var(--card-bg);
             width: 100%;
             max-width: 520px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 45px rgba(26, 26, 46, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            position: relative;
         }
 
-        /* Cabecera de la Marca (Estilo Web Agape) */
+        /* HEADER */
         .kiosk-header {
-            background: #1a1a2e;
+            background: var(--bg-dark);
             color: #ffffff;
-            padding: 24px 30px;
+            padding: 28px 24px 22px;
             text-align: center;
+            position: relative;
+        }
+
+        .church-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d8cde6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .kiosk-header h1 {
-            font-size: 20px;
+            font-size: 21px;
             margin: 0;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
         .kiosk-header p {
             font-size: 13px;
             margin: 6px 0 0 0;
-            color: #b8b8c8;
+            color: #a7a7c2;
         }
 
+        /* PROGRESS BAR */
+        .progress-container {
+            background: #ede9f2;
+            height: 6px;
+            width: 100%;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 33.33%;
+            background: linear-gradient(90deg, #5c32a6, #8e54e9);
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* BODY */
         .kiosk-body {
-            padding: 35px 30px;
+            padding: 28px 26px 32px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .step-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            margin: 0;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .step-subtitle {
+            margin: 2px 0 0;
+            font-size: 12px;
+            color: var(--text-muted);
         }
 
         .step {
@@ -63,28 +146,36 @@
 
         .step.active {
             display: block;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: slideFadeIn 0.28s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        h2 {
-            color: #1a1a2e;
-            font-size: 22px;
-            margin-top: 0;
-            margin-bottom: 20px;
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            color: #4a4b57;
-            margin-bottom: 6px;
-            margin-top: 16px;
+            color: #3b3b4f;
+            margin-bottom: 7px;
+        }
+
+        label .required {
+            color: #e11d48;
+            margin-left: 2px;
         }
 
         input[type="text"],
@@ -92,38 +183,77 @@
         input[type="number"],
         select {
             width: 100%;
-            padding: 15px;
+            padding: 14px 16px;
             font-size: 16px;
-            border: 2px solid #e1e1e8;
-            border-radius: 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
             background-color: #faf9fc;
+            color: var(--text-main);
             outline: none;
-            transition: all 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
             -webkit-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e6e82' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
         }
 
         input:focus, select:focus {
-            border-color: #5c32a6;
+            border-color: var(--border-focus);
             background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(92, 50, 166, 0.1);
+            box-shadow: 0 0 0 4px var(--primary-glow);
         }
 
+        input.invalid, select.invalid {
+            border-color: #e11d48;
+            background-color: #fff8f8;
+        }
+
+        .field-helper {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .conditional-box {
+            background: #faf8fd;
+            border: 1.5px dashed #d5c8e8;
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            margin-top: 14px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* BUTTONS */
         .btn-group {
             display: flex;
             gap: 12px;
-            margin-top: 30px;
+            margin-top: 26px;
         }
 
         button {
             flex: 1;
-            padding: 16px;
+            padding: 15px 18px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: transform 0.1s, background-color 0.2s;
-            text-align: center;
+            transition: transform 0.1s, background-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         button:active {
@@ -131,166 +261,670 @@
         }
 
         .btn-primary {
-            background-color: #5c32a6;
+            background-color: var(--primary);
             color: #ffffff;
+            box-shadow: 0 4px 12px rgba(92, 50, 166, 0.25);
         }
 
         .btn-primary:hover {
-            background-color: #4b2888;
+            background-color: var(--primary-hover);
         }
 
         .btn-secondary {
-            background-color: #f0f0f5;
-            color: #555566;
+            background-color: #eeedf2;
+            color: #4b4b5e;
+            flex: 0.6;
         }
 
         .btn-secondary:hover {
-            background-color: #e4e4eb;
+            background-color: #e2e1e9;
         }
 
-        /* Barra de progreso elegante */
-        .progress-container {
-            background: #f0f0f5;
-            height: 6px;
-            width: 100%;
+        /* SUCCESS SCREEN */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 40px 20px 25px;
+            animation: slideFadeIn 0.35s ease-out;
         }
 
-        .progress-fill {
-            height: 100%;
-            width: 50%;
-            background: #5c32a6;
-            transition: width 0.3s ease;
+        .success-screen.active {
+            display: block;
+        }
+
+        .success-icon-wrap {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: #d1fae5;
+            color: var(--success);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            margin-bottom: 20px;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.4); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-screen h2 {
+            font-size: 24px;
+            color: var(--bg-dark);
+            margin: 0 0 10px;
+            font-weight: 800;
+        }
+
+        .success-screen p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin: 0 0 24px;
+            line-height: 1.5;
+        }
+
+        .countdown-indicator {
+            font-size: 12px;
+            color: #8c8ca0;
+            margin-top: 18px;
+        }
+
+        /* LOADING OVERLAY */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(3px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            border-radius: var(--radius-lg);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #ebe6f5;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* IFRAME OCULTO FUERA DE PANTALLA (NO display:none para compatibilidad total con Brave/Safari) */
+        .offscreen-iframe {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0.01;
+            pointer-events: none;
+            border: none;
         }
     </style>
 </head>
 <body>
 
 <div class="kiosk-container">
-    <!-- Encabezado Institucional -->
+    <!-- Header -->
     <div class="kiosk-header">
+        <div class="church-badge">
+            <span>&#10013;</span> Bienvenido a Casa
+        </div>
         <h1>Ministerio Internacional Ágape</h1>
         <p>Sistema de Registro de Visitantes</p>
     </div>
 
-    <div class="progress-container">
+    <!-- Barra de progreso -->
+    <div class="progress-container" id="progressBar">
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
+    <!-- Contenido del Kiosko -->
     <div class="kiosk-body">
-        <form id="kioskForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe1Xc_QXY0yvGYCBGYhaJuO15zvzBDICylnV349B6iJp-9vUQ/formResponse" method="POST" target="hidden_iframe">
+        
+        <!-- Formulario principal hacia Google Form -->
+        <form id="kioskForm" 
+              action="https://docs.google.com/forms/d/e/1FAIpQLSe1Xc_QXY0yvGYCBGYhaJuO15zvzBDICylnV349B6iJp-9vUQ/formResponse" 
+              method="POST" 
+              target="hidden_iframe" 
+              novalidate>
             
-            <!-- PASO 1 -->
+            <!-- Parámetros internos de Google Form -->
+            <input type="hidden" name="fvv" value="1">
+            <input type="hidden" id="pageHistory" name="pageHistory" value="0,1">
+
+            <!-- ========================================== -->
+            <!-- PASO 1: DATOS PERSONALES -->
+            <!-- ========================================== -->
             <div class="step active" id="step1">
-                <h2>1. Tus Datos Personales</h2>
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div>
+                        <h2 class="step-title">Tus Datos Personales</h2>
+                        <p class="step-subtitle">Queremos conocerte y darte la bienvenida</p>
+                    </div>
+                </div>
                 
-                <label for="nombre">Nombre y Apellido</label>
-                <input type="text" id="nombre" name="entry.1302874866" placeholder="Escribe tu nombre completo" required autocomplete="off">
+                <div class="form-group">
+                    <label for="input_nombre">Nombre y Apellido <span class="required">*</span></label>
+                    <input type="text" 
+                           id="input_nombre" 
+                           placeholder="Escribe tu nombre completo" 
+                           autocomplete="off" 
+                           autocapitalize="words" 
+                           required>
+                </div>
 
-                <label for="celular">Celular</label>
-                <input type="tel" id="celular" name="entry.840733888" placeholder="Ej: 99998888" required autocomplete="off">
+                <div class="form-group">
+                    <label for="input_celular">Celular <span class="required">*</span></label>
+                    <input type="tel" 
+                           id="input_celular" 
+                           placeholder="Ej: 9999-8888" 
+                           inputmode="tel" 
+                           autocomplete="off" 
+                           required>
+                    <div class="field-helper">Para poder saludarte e informarte de nuestras reuniones</div>
+                </div>
 
-                <label for="edad">Edad</label>
-                <input type="number" id="edad" name="entry.942844008" placeholder="Tu edad" required autocomplete="off">
+                <div class="form-group">
+                    <label for="input_edad">Edad <span class="required">*</span></label>
+                    <input type="number" 
+                           id="input_edad" 
+                           placeholder="Tu edad en años" 
+                           inputmode="numeric" 
+                           min="1" 
+                           max="120" 
+                           autocomplete="off" 
+                           required>
+                </div>
 
                 <div class="btn-group">
-                    <button type="button" class="btn-primary" onclick="nextStep()">Siguiente &rarr;</button>
+                    <button type="button" class="btn-primary" onclick="validateAndGoStep(2)">
+                        Siguiente <span>&rarr;</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- PASO 2 -->
+            <!-- ========================================== -->
+            <!-- PASO 2: ¿CÓMO NOS CONOCISTE? -->
+            <!-- ========================================== -->
             <div class="step" id="step2">
-                <h2>2. Cuéntanos más sobre ti</h2>
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div>
+                        <h2 class="step-title">¿Cómo nos conociste?</h2>
+                        <p class="step-subtitle">Cuéntanos cómo llegaste a nuestra iglesia</p>
+                    </div>
+                </div>
                 
-                <label for="redSocial">¿Red social por la que nos conociste?</label>
-                <select id="redSocial" name="entry.1695214305" required>
-                    <option value="" disabled selected>Selecciona una opción...</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Instagram">Instagram</option>
-                    <option value="Youtube">Youtube</option>
-                    <option value="TikTok">TikTok</option>
-                </select>
+                <div class="form-group">
+                    <label for="input_quien_invito">¿Quién te invitó? <span class="required">*</span></label>
+                    <select id="input_quien_invito" required onchange="handleReferralChange(this.value)">
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="Redes sociales">Redes sociales</option>
+                        <option value="Un amigo o familiar">Un amigo o familiar</option>
+                        <option value="De otra manera">De otra manera</option>
+                    </select>
+                </div>
 
-                <label for="asisteIglesia">¿Asistes a una iglesia?</label>
-                <select id="asisteIglesia" name="entry.745116709" required onchange="toggleIglesiaField(this.value)">
-                    <option value="" disabled selected>Selecciona...</option>
-                    <option value="Sí">Sí</option>
-                    <option value="No">No</option>
-                </select>
+                <!-- Subcampo: Redes Sociales -->
+                <div id="subCampoRedes" class="conditional-box" style="display: none;">
+                    <label for="input_red_social">¿Por cuál red social nos conociste? <span class="required">*</span></label>
+                    <select id="input_red_social">
+                        <option value="" disabled selected>Selecciona una red...</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Youtube">Youtube</option>
+                        <option value="TikTok">TikTok</option>
+                    </select>
+                </div>
 
-                <div id="campoNombreIglesia" style="display: none;">
-                    <label for="nombreIglesia">¿Cuál es el nombre de la iglesia?</label>
-                    <input type="text" id="nombreIglesia" name="entry.215642894" placeholder="Nombre de tu iglesia" autocomplete="off">
+                <!-- Subcampo: Amigo o Familiar -->
+                <div id="subCampoAmigo" class="conditional-box" style="display: none;">
+                    <label for="input_nombre_amigo">¿Cuál es el nombre de tu amigo o familiar? <span class="required">*</span></label>
+                    <input type="text" 
+                           id="input_nombre_amigo" 
+                           placeholder="Nombre de quien te invitó" 
+                           autocapitalize="words" 
+                           autocomplete="off">
+                </div>
+
+                <!-- Subcampo: De otra manera (Rótulo) -->
+                <div id="subCampoRotulo" class="conditional-box" style="display: none;">
+                    <label for="input_rotulo">¿Llegaste por medio del rótulo?</label>
+                    <select id="input_rotulo">
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
                 </div>
 
                 <div class="btn-group">
-                    <button type="button" class="btn-secondary" onclick="prevStep()">&larr; Atrás</button>
-                    <button type="submit" class="btn-primary">Finalizar Registro</button>
+                    <button type="button" class="btn-secondary" onclick="goToStep(1)">
+                        <span>&larr;</span> Atrás
+                    </button>
+                    <!-- Este botón cambiará dinámicamente a 'Finalizar' si eligen 'De otra manera' -->
+                    <button type="button" class="btn-primary" id="btnStep2Action" onclick="handleStep2Next()">
+                        Siguiente <span>&rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PASO 3: INFORMACIÓN DE IGLESIA -->
+            <!-- ========================================== -->
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div>
+                        <h2 class="step-title">Información de Iglesia</h2>
+                        <p class="step-subtitle">Queremos saber si ya te congregas</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input_asiste_iglesia">¿Asistes a una iglesia? <span class="required">*</span></label>
+                    <select id="input_asiste_iglesia" required onchange="toggleIglesiaField(this.value)">
+                        <option value="" disabled selected>Selecciona...</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div id="campoNombreIglesia" class="conditional-box" style="display: none;">
+                    <label for="input_nombre_iglesia">¿Cuál es el nombre de la iglesia?</label>
+                    <input type="text" 
+                           id="input_nombre_iglesia" 
+                           placeholder="Ej: Iglesia Central..." 
+                           autocapitalize="words" 
+                           autocomplete="off">
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn-secondary" onclick="goToStep(2)">
+                        <span>&larr;</span> Atrás
+                    </button>
+                    <button type="button" class="btn-primary" id="btnSubmit" onclick="handleFinalSubmit()">
+                        Finalizar Registro &#10003;
+                    </button>
                 </div>
             </div>
         </form>
+
+        <!-- ========================================== -->
+        <!-- PANTALLA DE ÉXITO TRAS REGISTRO -->
+        <!-- ========================================== -->
+        <div class="success-screen" id="successScreen">
+            <div class="success-icon-wrap">&#10003;</div>
+            <h2>¡Muchas gracias por registrarte!</h2>
+            <p>Es una gran bendición tenerte con nosotros en <strong>Ministerio Internacional Ágape</strong>. ¡Esperamos que disfrutes el servicio!</p>
+            
+            <button type="button" class="btn-primary" onclick="resetFormToStart()" style="margin: 0 auto; max-width: 260px;">
+                Registrar a otra persona
+            </button>
+            <div class="countdown-indicator" id="countdownIndicator">
+                Esta pantalla se reiniciará automáticamente en <span id="countdownSec">6</span>s
+            </div>
+        </div>
+
     </div>
-    
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="formSubmitted()"></iframe>
+
+    <!-- Indicador visual de envío (Loading) -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Guardando registro...</div>
+    </div>
+
+    <!-- Iframe oculto fuera de pantalla para captura nativa del formulario -->
+    <iframe name="hidden_iframe" id="hidden_iframe" class="offscreen-iframe" onload="handleIframeLoad()"></iframe>
 </div>
 
 <script>
-    function nextStep() {
-        document.getElementById('step1').classList.remove('active');
-        document.getElementById('step2').classList.add('active');
-        document.getElementById('progressFill').style.width = '100%';
+    let currentStep = 1;
+    let totalSteps = 3;
+    let isSubmitting = false;
+    let countdownInterval = null;
+
+    // Navegación entre pasos
+    function goToStep(stepNumber) {
+        currentStep = stepNumber;
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        
+        const targetStep = document.getElementById('step' + stepNumber);
+        if (targetStep) {
+            targetStep.classList.add('active');
+        }
+
+        updateProgressBar();
     }
 
-    function prevStep() {
-        document.getElementById('step2').classList.remove('active');
-        document.getElementById('step1').classList.add('active');
-        document.getElementById('progressFill').style.width = '50%';
+    function updateProgressBar() {
+        const progressFill = document.getElementById('progressFill');
+        const referralVal = document.getElementById('input_quien_invito').value;
+        
+        // Si eligió 'De otra manera', solo son 2 pasos en total
+        const isTwoStepFlow = (referralVal === 'De otra manera');
+        totalSteps = isTwoStepFlow ? 2 : 3;
+
+        let pct = (currentStep / totalSteps) * 100;
+        if (pct > 100) pct = 100;
+        progressFill.style.width = pct + '%';
     }
 
+    // Validar Paso 1 antes de avanzar
+    function validateAndGoStep(targetStep) {
+        const nombre = document.getElementById('input_nombre');
+        const celular = document.getElementById('input_celular');
+        const edad = document.getElementById('input_edad');
+
+        let isValid = true;
+        [nombre, celular, edad].forEach(input => {
+            if (!input.value.trim()) {
+                input.classList.add('invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+
+        if (!isValid) {
+            alert('Por favor completa todos tus datos personales para continuar.');
+            return;
+        }
+
+        goToStep(targetStep);
+    }
+
+    // Manejar cambios en "¿Quién te invitó?"
+    function handleReferralChange(value) {
+        const subRedes = document.getElementById('subCampoRedes');
+        const subAmigo = document.getElementById('subCampoAmigo');
+        const subRotulo = document.getElementById('subCampoRotulo');
+        const btnNext2 = document.getElementById('btnStep2Action');
+
+        subRedes.style.display = 'none';
+        subAmigo.style.display = 'none';
+        subRotulo.style.display = 'none';
+
+        if (value === 'Redes sociales') {
+            subRedes.style.display = 'block';
+            btnNext2.innerHTML = 'Siguiente <span>&rarr;</span>';
+            totalSteps = 3;
+        } else if (value === 'Un amigo o familiar') {
+            subAmigo.style.display = 'block';
+            btnNext2.innerHTML = 'Siguiente <span>&rarr;</span>';
+            totalSteps = 3;
+        } else if (value === 'De otra manera') {
+            subRotulo.style.display = 'block';
+            btnNext2.innerHTML = 'Finalizar Registro &#10003;';
+            totalSteps = 2;
+        }
+
+        updateProgressBar();
+    }
+
+    // Manejar acción del botón en Paso 2
+    function handleStep2Next() {
+        const referral = document.getElementById('input_quien_invito');
+        if (!referral.value) {
+            referral.classList.add('invalid');
+            alert('Por favor selecciona cómo nos conociste.');
+            return;
+        }
+        referral.classList.remove('invalid');
+
+        if (referral.value === 'Redes sociales') {
+            const red = document.getElementById('input_red_social');
+            if (!red.value) {
+                red.classList.add('invalid');
+                alert('Por favor selecciona la red social.');
+                return;
+            }
+            red.classList.remove('invalid');
+            goToStep(3);
+        } else if (referral.value === 'Un amigo o familiar') {
+            const amigo = document.getElementById('input_nombre_amigo');
+            if (!amigo.value.trim()) {
+                amigo.classList.add('invalid');
+                alert('Por favor indica el nombre de la persona que te invitó.');
+                return;
+            }
+            amigo.classList.remove('invalid');
+            goToStep(3);
+        } else if (referral.value === 'De otra manera') {
+            executeSubmission();
+        }
+    }
+
+    // Toggle para campo nombre de iglesia en Paso 3
     function toggleIglesiaField(value) {
         const campo = document.getElementById('campoNombreIglesia');
-        const input = document.getElementById('nombreIglesia');
+        const input = document.getElementById('input_nombre_iglesia');
         if (value === 'Sí') {
             campo.style.display = 'block';
-            input.required = true;
+            input.focus();
         } else {
             campo.style.display = 'none';
-            input.required = false;
             input.value = '';
         }
     }
 
-    let isSubmitting = false;
-
-    document.getElementById('kioskForm').onsubmit = function() {
-        isSubmitting = true;
-    };
-
-    function formSubmitted() {
-        if (isSubmitting) {
-            alert('¡Muchas gracias por registrarte en Ágape!');
-            location.reload();
+    // Validación final de Paso 3
+    function handleFinalSubmit() {
+        const asiste = document.getElementById('input_asiste_iglesia');
+        if (!asiste.value) {
+            asiste.classList.add('invalid');
+            alert('Por favor selecciona si asistes a una iglesia.');
+            return;
         }
+        asiste.classList.remove('invalid');
+
+        executeSubmission();
     }
 
-    (function setInactivityTimer() {
-        let timer;
-        const timeoutDuration = 60000;
+    // Configura y recopila todos los parámetros del POST
+    function buildPayloadParams() {
+        const referralVal = document.getElementById('input_quien_invito').value;
+        const pageHistoryInput = document.getElementById('pageHistory');
 
-        function resetTimer() {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                location.reload();
-            }, timeoutDuration);
+        // 1. Asignar nombres al DOM para el formulario nativo
+        document.getElementById('input_nombre').name = 'entry.1302874866';
+        document.getElementById('input_celular').name = 'entry.840733888';
+        document.getElementById('input_edad').name = 'entry.942844008';
+        document.getElementById('input_quien_invito').name = 'entry.1695214305';
+
+        // Limpiar atributos name de campos dinámicos
+        ['input_red_social', 'input_nombre_amigo', 'input_rotulo', 'input_asiste_iglesia', 'input_nombre_iglesia'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.removeAttribute('name');
+        });
+
+        // Crear mapa para fetch()
+        const params = new URLSearchParams();
+        params.append('entry.1302874866', document.getElementById('input_nombre').value.trim());
+        params.append('entry.840733888', document.getElementById('input_celular').value.trim());
+        params.append('entry.942844008', document.getElementById('input_edad').value.trim());
+        params.append('entry.1695214305', referralVal);
+        params.append('fvv', '1');
+
+        if (referralVal === 'Redes sociales') {
+            pageHistoryInput.value = '0,1';
+            params.append('pageHistory', '0,1');
+
+            const redVal = document.getElementById('input_red_social').value;
+            const asisteVal = document.getElementById('input_asiste_iglesia').value;
+            const nombreIglesiaVal = document.getElementById('input_nombre_iglesia').value.trim();
+
+            document.getElementById('input_red_social').name = 'entry.506704329';
+            document.getElementById('input_asiste_iglesia').name = 'entry.745116709';
+            document.getElementById('input_nombre_iglesia').name = 'entry.215642894';
+
+            params.append('entry.506704329', redVal);
+            params.append('entry.745116709', asisteVal);
+            if (nombreIglesiaVal) params.append('entry.215642894', nombreIglesiaVal);
+
+        } else if (referralVal === 'Un amigo o familiar') {
+            pageHistoryInput.value = '0,2';
+            params.append('pageHistory', '0,2');
+
+            const amigoVal = document.getElementById('input_nombre_amigo').value.trim();
+            const asisteVal = document.getElementById('input_asiste_iglesia').value;
+            const nombreIglesiaVal = document.getElementById('input_nombre_iglesia').value.trim();
+
+            document.getElementById('input_nombre_amigo').name = 'entry.220659715';
+            document.getElementById('input_asiste_iglesia').name = 'entry.1310247805';
+            document.getElementById('input_nombre_iglesia').name = 'entry.460460683';
+
+            params.append('entry.220659715', amigoVal);
+            params.append('entry.1310247805', asisteVal);
+            if (nombreIglesiaVal) params.append('entry.460460683', nombreIglesiaVal);
+
+        } else if (referralVal === 'De otra manera') {
+            pageHistoryInput.value = '0,3';
+            params.append('pageHistory', '0,3');
+
+            const rotuloVal = document.getElementById('input_rotulo').value;
+            if (rotuloVal) {
+                document.getElementById('input_rotulo').name = 'entry.396210123';
+                params.append('entry.396210123', rotuloVal);
+            }
         }
 
-        window.onload = resetTimer;
-        document.onmousemove = resetTimer;
-        document.onkeypress = resetTimer;
-        document.ontouchstart = resetTimer;
-        document.onclick = resetTimer;
-        document.onscroll = resetTimer;
+        return params;
+    }
+
+    // ENVÍO DUAL (fetch no-cors + iframe submit): Garantiza el guardado en cualquier navegador
+    async function executeSubmission() {
+        if (isSubmitting) return;
+        isSubmitting = true;
+
+        document.getElementById('loadingOverlay').classList.add('active');
+
+        const params = buildPayloadParams();
+        const formAction = document.getElementById('kioskForm').action;
+
+        console.log('Enviando registro Ágape a Google Forms...', params.toString());
+
+        // 1. Envío primario vía fetch (no-cors)
+        let fetchDone = false;
+        try {
+            await fetch(formAction, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            });
+            fetchDone = true;
+            console.log('Fetch no-cors completado.');
+        } catch (err) {
+            console.warn('Advertencia en fetch:', err);
+        }
+
+        // 2. Envío secundario vía formulario HTML nativo
+        try {
+            document.getElementById('kioskForm').submit();
+        } catch (err) {
+            console.warn('Advertencia en submit nativo:', err);
+        }
+
+        // Mostrar pantalla de éxito tras 700ms
+        setTimeout(() => {
+            showSuccessScreen();
+        }, 700);
+    }
+
+    function handleIframeLoad() {
+        if (!isSubmitting) return;
+        showSuccessScreen();
+    }
+
+    function showSuccessScreen() {
+        document.getElementById('loadingOverlay').classList.remove('active');
+        document.getElementById('kioskForm').style.display = 'none';
+        document.getElementById('progressBar').style.display = 'none';
+        document.getElementById('successScreen').classList.add('active');
+
+        let secondsLeft = 6;
+        const countdownEl = document.getElementById('countdownSec');
+        countdownEl.innerText = secondsLeft;
+
+        clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+            secondsLeft--;
+            if (countdownEl) countdownEl.innerText = secondsLeft;
+            if (secondsLeft <= 0) {
+                clearInterval(countdownInterval);
+                resetFormToStart();
+            }
+        }, 1000);
+    }
+
+    function resetFormToStart() {
+        clearInterval(countdownInterval);
+        isSubmitting = false;
+
+        const form = document.getElementById('kioskForm');
+        form.reset();
+        
+        document.getElementById('subCampoRedes').style.display = 'none';
+        document.getElementById('subCampoAmigo').style.display = 'none';
+        document.getElementById('subCampoRotulo').style.display = 'none';
+        document.getElementById('campoNombreIglesia').style.display = 'none';
+
+        document.getElementById('btnStep2Action').innerHTML = 'Siguiente <span>&rarr;</span>';
+        document.getElementById('successScreen').classList.remove('active');
+        form.style.display = 'block';
+        document.getElementById('progressBar').style.display = 'block';
+
+        goToStep(1);
+    }
+
+    // Temporizador de inactividad de 60 segundos
+    (function setupInactivityWatcher() {
+        let timer;
+        const TIMEOUT_MS = 60000;
+
+        function resetInactivity() {
+            clearTimeout(timer);
+            if (!isSubmitting) {
+                timer = setTimeout(() => {
+                    if (currentStep !== 1 || document.getElementById('input_nombre').value.trim() !== '') {
+                        resetFormToStart();
+                    }
+                }, TIMEOUT_MS);
+            }
+        }
+
+        window.onload = resetInactivity;
+        ['mousemove', 'keypress', 'touchstart', 'click', 'scroll'].forEach(evt => {
+            document.addEventListener(evt, resetInactivity, { passive: true });
+        });
     })();
 </script>
 
 </body>
 </html>
+
